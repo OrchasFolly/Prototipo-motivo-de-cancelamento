@@ -1,0 +1,24 @@
+/* Funções da tabela */
+.table {
+  position: sticky;
+  width: (400px, 800px);
+}
+
+.table tr {
+  scroll-snap-align: start;
+}
+
+.tabScroll {
+  display: flex;
+  scrollbar-color: #282c38 #282c38;
+  scrollbar-width: thin;
+  overflow-x: auto;
+  scroll-snap-type: y mandatory;
+  height: 400px;
+  transition: 1s;
+}
+
+.tabScroll:hover {
+  scrollbar-color: #fcfcfc42 #282c38;
+  transition: 1s;
+}
