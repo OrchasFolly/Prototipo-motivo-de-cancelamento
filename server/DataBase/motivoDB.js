@@ -9,14 +9,14 @@ export default class MotivoDB{
     async init(){
         try {
             const conexao = await conection();
-            const sql = `CREATE TABLE IF NOT EXISTS motivo (
+            const sql = `CREATE TABLE IF NOT EXISTS cancelamento (
                 cpf VARCHAR(14) NOT NULL PRIMARY KEY,
                 nome VARCHAR(100) NOT NULL,
                 motivo VARCHAR(255) NOT NULL
             )`;
             await conexao.execute(sql);
         } catch ( erro ) {
-            console.log("Erro ao iniciar a tabela motivo:" + erro);
+            console.log("Erro ao iniciar a tabela cancelamento:" + erro);
         }
 
     }
@@ -24,8 +24,8 @@ export default class MotivoDB{
     async gravar(cliente){
         if (cliente instanceof MotivoCancelamento){
             const conexao = await conection();
-            const sql = `INSERT INTO motivo (cpf, nome, motivo)
-                         VALUES ( ?, ?, ?, ?, ?, ?, ? )`;
+            const sql = `INSERT INTO cancelamento (cpf, nome, motivo)
+                         VALUES ( ?, ?, ?)`;
             const parametros = [
                 cliente.cpf,
                 cliente.nome,
@@ -41,13 +41,13 @@ export default class MotivoDB{
     async alterar(cliente){
         if (cliente instanceof MotivoCancelamento){
             const conexao = await conection();
-            const sql = `UPDATE motivo SET 
+            const sql = `UPDATE cancelamento SET 
                          nome = ?, motivo = ?
                          WHERE cpf = ?`;            
             const parametros = [
-                cliente.cpf,
                 cliente.nome,
-                cliente.motivo
+                cliente.motivo,
+                cliente.cpf
             ];
             await conexao.execute(sql, parametros);
             await conexao.release();
@@ -57,7 +57,7 @@ export default class MotivoDB{
     async excluir(cliente){
         if (cliente instanceof MotivoCancelamento){
             const conexao = await conection();
-            const sql = `DELETE FROM motivo WHERE cpf = ?`;
+            const sql = `DELETE FROM cancelamento WHERE cpf = ?`;
             const parametros = [cliente.cpf];
             await conexao.execute(sql, parametros);
             await conexao.release();
@@ -66,7 +66,7 @@ export default class MotivoDB{
 
     async consultar(){
         const conexao = await conection();
-        const sql = `SELECT * FROM motivo ORDER BY nome`;
+        const sql = `SELECT * FROM cancelamento ORDER BY nome`;
         const [registros, campos] = await conexao.execute(sql);
         await conexao.release();
         let listaMotivos = [];
@@ -83,7 +83,7 @@ export default class MotivoDB{
     
     async consultarPelaChave(cpf){
         const conexao = await conection();
-        const sql = `SELECT * FROM motivo WHERE cpf = ?`;
+        const sql = `SELECT * FROM cancelamento WHERE cpf = ?`;
         const [registros, campos] = await conexao.execute(sql, [cpf]);
         await conexao.release();
         let listaMotivos = [];

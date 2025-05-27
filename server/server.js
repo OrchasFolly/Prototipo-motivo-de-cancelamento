@@ -1,5 +1,5 @@
 import express from 'express';
-import rotaMotivo from './Router/rotaC';
+import rotaMotivo from './Router/rotaC.js';
 
 const porta = 5128;
 const localhost = "localhost"; // "0.0.0.0"

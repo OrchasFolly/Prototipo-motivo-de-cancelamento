@@ -3,7 +3,6 @@ import ButtonPrimary from '../components/ButtonPrimary';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react'; 
 import { Col, Row } from 'react-bootstrap';
-import services from '../services/storageService.js';
 
 function Cancelamento() {
   const [validated, setValidated] = useState(false);
@@ -78,7 +77,6 @@ function Cancelamento() {
     else{
       form.classList.add('was-validated');
       setValidated(true);
-      services.saveRegister();
     }
   }
 
