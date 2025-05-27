@@ -25,15 +25,24 @@ function showList(){
     return registers;
 }
 
-function delCancel(event){
+function del(event){
     localStorage.removeItem(event);
-    window.open("/ListaCancelamento", "_self");
+    window.open("/motivo-cancelamento", "_self")
+}
+
+function edit(event){
+    const listCancels = document.getElementById("displayList");
+    const form = document.getElementById("formRegister");
+    form.style.display="flex"
+    listCancels.style.display="none";
+    document.getElementById("cpfValid").value = event;
 }
 
 const services = {
     saveRegister,
     showList,
-    delCancel
+    del,
+    edit
 };
 
 export default services;

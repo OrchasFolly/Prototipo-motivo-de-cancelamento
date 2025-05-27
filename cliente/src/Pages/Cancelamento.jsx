@@ -8,6 +8,13 @@ import services from '../services/storageService.js';
 function Cancelamento() {
   const [validated, setValidated] = useState(false);
 
+  function changePage(){
+    const listCancels = document.getElementById("displayList");
+    const form = document.getElementById("formRegister");
+    form.style.display="none"
+    listCancels.style.display="flex";
+  }
+  
   function checkCPF(cpf) {
     cpf = cpf.replace(/\D/g,"");
     if(cpf.length !== 11){
@@ -77,7 +84,7 @@ function Cancelamento() {
 
   return (
     <>
-      <Form className="App-header-cancelamento" onSubmit={handleValidation} validated={validated} noValidate>
+      <Form id="formRegister" className="App-header-cancelamento" onSubmit={handleValidation} validated={validated} noValidate>
         <h1 className="title">Motivo de cancelamento</h1>
 
         <Row>
@@ -156,12 +163,13 @@ function Cancelamento() {
               variant={"secondary"}
             />
             <ButtonPrimary 
-              type={"button"} 
+              type={"button"}
               title={"Lista"} 
               variant={"secondary"} 
-              anyEvent={() => {window.open("/ListaCancelamento", "_self")}}
+              anyEvent={() => {changePage()}}
             />
           </Col>
+          <div id="alert-message"></div>
         </Row>
       </Form>
     </>

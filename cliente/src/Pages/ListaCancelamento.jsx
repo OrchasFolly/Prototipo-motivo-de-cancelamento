@@ -6,7 +6,7 @@ import LoadCards from '../Components/LoadList/LoadCards';
 function ListaCancelamento() {
   return (
     <>
-      <table className="App-header-cancelamento">
+      <table id="displayList" className="App-header-lista">
         <thead className="title">
           <tr>
             <td>
@@ -28,7 +28,7 @@ function ListaCancelamento() {
                 type={"button"} 
                 title={"Voltar"} 
                 variant={"secondary"} 
-                anyEvent={() => {window.open("/", "_self")}}
+                anyEvent={() => {window.open("/motivo-cancelamento", "_self")}}
               />
             </td>
           </tr>

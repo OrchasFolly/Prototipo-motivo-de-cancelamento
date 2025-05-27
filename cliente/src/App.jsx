@@ -18,8 +18,7 @@ function App() {
       <div className="App-header">
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Cancelamento/>}/>
-            <Route path="/ListaCancelamento" element={<ListaCancelamento/>}/>
+            <Route path="/motivo-cancelamento" element={<><Cancelamento/><ListaCancelamento/></>}/>
           </Routes>
         </BrowserRouter>
       </div>
