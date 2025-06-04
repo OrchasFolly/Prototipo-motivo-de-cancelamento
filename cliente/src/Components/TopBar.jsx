@@ -1,7 +1,7 @@
-import { CgMic } from "react-icons/cg";
-import { FaGear } from "react-icons/fa6";
-import { FaHome } from "react-icons/fa";
-import './TopBar.css'
+import './TopBar.css';
+import { CgMic } from 'react-icons/cg';
+import { FaGear } from 'react-icons/fa6';
+import { FaHome } from 'react-icons/fa';
 
 function TopBar() {
     return (

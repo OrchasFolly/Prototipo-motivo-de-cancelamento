@@ -36,3 +36,15 @@ button, input {
       font-size: 60px;
   }
 }
+
+@media (height <= 915px ) and (width >= 344px){
+  .App-header {
+    min-height: 120vh;
+  }
+}
+
+@media (height <= 800px ) and (width > 1000px){
+  .App-header {
+    min-height: 170vh;
+  }
+}

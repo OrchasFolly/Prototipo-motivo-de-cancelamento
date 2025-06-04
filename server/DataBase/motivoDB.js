@@ -18,49 +18,59 @@ export default class MotivoDB{
         } catch ( erro ) {
             console.log("Erro ao iniciar a tabela cancelamento:" + erro);
         }
-
     }
 
     async gravar(cliente){
         if (cliente instanceof MotivoCancelamento){
-            const conexao = await conection();
-            const sql = `INSERT INTO cancelamento (cpf, nome, motivo)
-                         VALUES ( ?, ?, ?)`;
-            const parametros = [
-                cliente.cpf,
-                cliente.nome,
-                cliente.motivo
-            ];
+            try {
+                const conexao = await conection();
+                const sql = `INSERT INTO cancelamento (cpf, nome, motivo)
+                            VALUES ( ?, ?, ?)`;
+                const parametros = [
+                    cliente.cpf,
+                    cliente.nome,
+                    cliente.motivo
+                ];
 
-            await conexao.execute(sql, parametros);
-            await conexao.release();
-                         
+                await conexao.execute(sql, parametros);
+                await conexao.release();
+            } catch ( erro ) {
+                console.log(erro);
+            }
         }
     }
 
     async alterar(cliente){
         if (cliente instanceof MotivoCancelamento){
-            const conexao = await conection();
-            const sql = `UPDATE cancelamento SET 
-                         nome = ?, motivo = ?
-                         WHERE cpf = ?`;            
-            const parametros = [
-                cliente.nome,
-                cliente.motivo,
-                cliente.cpf
-            ];
-            await conexao.execute(sql, parametros);
-            await conexao.release();
+            try {
+                const conexao = await conection();
+                const sql = `UPDATE cancelamento SET 
+                            nome = ?, motivo = ?
+                            WHERE cpf = ?`;            
+                const parametros = [
+                    cliente.nome,
+                    cliente.motivo,
+                    cliente.cpf
+                ];
+                await conexao.execute(sql, parametros);
+                await conexao.release();
+            } catch ( erro ) {
+                console.log(erro);
+            }
         }
     }
 
     async excluir(cliente){
         if (cliente instanceof MotivoCancelamento){
-            const conexao = await conection();
-            const sql = `DELETE FROM cancelamento WHERE cpf = ?`;
-            const parametros = [cliente.cpf];
-            await conexao.execute(sql, parametros);
-            await conexao.release();
+            try {
+                const conexao = await conection();
+                const sql = `DELETE FROM cancelamento WHERE cpf = ?`;
+                const parametros = [cliente.cpf];
+                await conexao.execute(sql, parametros);
+                await conexao.release();
+            } catch ( erro ) {
+                console.log(erro);
+            }
         }
     }
 

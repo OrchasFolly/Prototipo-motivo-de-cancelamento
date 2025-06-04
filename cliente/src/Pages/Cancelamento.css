@@ -1,30 +1,44 @@
 .App-header-cancelamento {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 40vh;
-    max-height: 100vh;
-    width: 480px;
-    border-radius: 1.5rem;
-    background-color: #282c38;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 480px;
+  background-color: #282c38;
 }
 
 .title {
-    font-size: 100%;
+  font-size: 100%;
+}
+
+.alert {
+  display: flex;
+  align-items: center;
+  font-size: small;
+  height: 20px;
 }
 
 .description {
-    width: 450px;
-    padding: 20px;
-    font-size: 10pt;
+  width: 450px;
+  padding: 20px;
+  font-size: 10pt;
 }
 
 .alertCode {
-    display: none;
-    justify-content: center;
-    margin: 10px;
-    color: #dd4242;
+  display: none;
+  justify-content: center;
+  margin: 10px;
+  color: #dd4242;
+}
+
+.displayList {
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+
+#get-tab {
+  font-size: medium;
 }
 
 @media (width <= 670px){

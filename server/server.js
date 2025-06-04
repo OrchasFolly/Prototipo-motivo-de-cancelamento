@@ -1,9 +1,11 @@
 import express from 'express';
 import rotaMotivo from './Router/rotaC.js';
+import cors from 'cors'
 
-const porta = 5128;
+const porta = 5174;
 const localhost = "localhost"; // "0.0.0.0"
 const app = express();
+app.use(cors())
 
 app.use(express.urlencoded({extended:false}));
 

@@ -12,7 +12,7 @@ export default async function conection() {
             port: 3306,
             password: '',
             waitForConnections: true,
-            connectionLimit: 100,
+            connectionLimit: 500,
             maxIdle: 10, // max idle connections, the default value is the same as `connectionLimit`
             idleTimeout: 60000, // idle connections timeout, in milliseconds, the default value 60000
             queueLimit: 0,

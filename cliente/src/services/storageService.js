@@ -1,5 +1,13 @@
+function mostrarMensagem(mensagem, tipo="success"){
+    const aviso = document.getElementById("alert-message");
+    aviso.innerHTML = `<div class="alert alert-${tipo}" role="alert">Mensagem: ${mensagem}</div>`
+    setInterval(() => {
+        aviso.innerHTML = "";
+    }, 5000);
+}
 
 function saveRegister(){
+    mostrarMensagem("erro", "success")
     const cpf = document.getElementById("cpfValid").value;
     const name = document.getElementById("nameValid").value;
 

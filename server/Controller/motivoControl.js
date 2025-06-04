@@ -1,7 +1,8 @@
 import MotivoCancelamento from "../Model/Motivo.js"
+import checkCPF from "../Validation/checkCPF.js";
 
 export default class MotivoControl{
-
+    // Requisição POST
     gravar(requisicao, resposta){
         resposta.type('application/json');
 
@@ -11,7 +12,7 @@ export default class MotivoControl{
             const nome = dados.nome;
             const motivo = dados.motivo;
 
-            if(cpf && nome && motivo){
+            if(cpf && nome && motivo && checkCPF(cpf)){
                 const cliente = new MotivoCancelamento(cpf, nome, motivo);
                 cliente.gravar().then(() => {
                     resposta.status(200).json({
@@ -50,7 +51,7 @@ export default class MotivoControl{
             const nome = dados.nome;
             const motivo = dados.motivo;
 
-            if(cpf && nome && motivo){
+            if(cpf && nome && motivo && checkCPF(cpf)){
                 const cliente = new MotivoCancelamento(cpf, nome, motivo);
                 cliente.alterar().then(() => {
                     resposta.status(200).json({

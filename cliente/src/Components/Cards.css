@@ -1,9 +1,0 @@
-.list {
-  display: flex;
-  flex-direction: column;
-  font-size: medium;
-}
-
-.btnList {
-  display: flex;
-}

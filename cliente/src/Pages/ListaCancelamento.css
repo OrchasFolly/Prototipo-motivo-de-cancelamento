@@ -1,42 +1,62 @@
-.App-header-lista {
+.App-header-list {
   display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 40vh;
-  max-height: 100vh;
-  width: 480px;
-  border-radius: 1.5rem;
-  background-color: #282c38;
 }
 
-@media (width <= 670px){
-  .App-header-lista {
-    width: 344px;
-  }
+.inputList {
+  width: 300px;
+  height: 30px;
+  margin: 5px;
+  font-size: medium;
 }
 
 /* Funções da tabela */
-.table {
+.tableStyle {
   position: sticky;
   width: (400px, 800px);
+  height: 250px;
 }
 
-.table tr {
+.tableStyle tr {
   scroll-snap-align: start;
 }
 
+.colWidth {
+  width: 200px;
+}
+
+.btnTable {
+  margin: 3px;
+}
+
 .tabScroll {
-  display: flex;
-  scrollbar-color: #282c38 #282c38;
-  scrollbar-width: thin;
+  background-color: #fcfcfc42;
   overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #fcfcfc42 #282c38;
   scroll-snap-type: y mandatory;
-  height: 400px;
-  transition: 1s;
+  font-size: medium;
+  width: 400px;
+}
+
+.tabScrollDesc {
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  scrollbar-width:none;
+  scroll-snap-type: y mandatory;
+  width: 450px;
 }
 
 .tabScroll:hover {
   scrollbar-color: #fcfcfc42 #282c38;
   transition: 1s;
+}
+
+@media (width <= 670px){
+  .tabScroll {
+    width: 300px;
+  }
 }

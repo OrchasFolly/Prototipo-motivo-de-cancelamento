@@ -1,14 +1,16 @@
-import './ButtonPrimary.css'
+import './ButtonPrimary.css';
 import { Button } from 'react-bootstrap';
 
-function ButtonPrimary({type ,title, variant, size, anyEvent = () => {}}) {
+function ButtonPrimary({id, type ,title, variant, size, disabled, anyEvent = () => {}}) {
     return (
-        <Button 
-            className="others-styles" 
+        <Button
+            className="others-styles"
+            id={id} 
+            type={type}
             variant={variant}
-            size={size}
-            type={type} 
-            onClick={anyEvent}>
+            size={size} 
+            onClick={anyEvent}
+            disabled = {disabled}>
             {title}
         </Button>
     );
