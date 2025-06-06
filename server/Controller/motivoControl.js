@@ -1,5 +1,4 @@
 import MotivoCancelamento from "../Model/Motivo.js"
-import checkCPF from "../Validation/checkCPF.js";
 
 export default class MotivoControl{
     // Requisição POST
@@ -8,12 +7,11 @@ export default class MotivoControl{
 
         if(requisicao.method === "POST" && requisicao.is('application/json')){
             const dados = requisicao.body;
-            const cpf = dados.cpf;
             const nome = dados.nome;
             const motivo = dados.motivo;
 
-            if(cpf && nome && motivo && checkCPF(cpf)){
-                const cliente = new MotivoCancelamento(cpf, nome, motivo);
+            if(nome && motivo){
+                const cliente = new MotivoCancelamento(null, nome, motivo);
                 cliente.gravar().then(() => {
                     resposta.status(200).json({
                         status: true,
@@ -47,12 +45,12 @@ export default class MotivoControl{
 
         if(requisicao.method === "PUT" && requisicao.is('application/json')){
             const dados = requisicao.body;
-            const cpf = dados.cpf;
+            const cod = dados.cod;
             const nome = dados.nome;
             const motivo = dados.motivo;
 
-            if(cpf && nome && motivo && checkCPF(cpf)){
-                const cliente = new MotivoCancelamento(cpf, nome, motivo);
+            if(cod && nome && motivo){
+                const cliente = new MotivoCancelamento(cod, nome, motivo);
                 cliente.alterar().then(() => {
                     resposta.status(200).json({
                         status: true,
@@ -86,10 +84,10 @@ export default class MotivoControl{
 
         if(requisicao.method === "DELETE" && requisicao.is('application/json')){
             const dados = requisicao.body;
-            const cpf = dados.cpf;
+            const cod = dados.cod;
 
-            if(cpf){
-                const cliente = new MotivoCancelamento(cpf);
+            if(cod){
+                const cliente = new MotivoCancelamento(cod);
                 cliente.excluir().then(() => {
                     resposta.status(200).json({
                         status: true,
@@ -124,8 +122,8 @@ export default class MotivoControl{
         if(requisicao.method === "GET"){
             const cliente = new MotivoCancelamento();
 
-            if (requisicao.params.cpf){
-                cliente.consultarPelaChave(requisicao.params.cpf).then((listaMotivos) => {
+            if (requisicao.params.cod){
+                cliente.consultarPelaChave(requisicao.params.cod).then((listaMotivos) => {
                         resposta.status(200).json(
                             {
                                 "status": true,

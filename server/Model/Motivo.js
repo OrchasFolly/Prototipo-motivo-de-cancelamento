@@ -1,24 +1,24 @@
 import MotivoDB from "../DataBase/motivoDB.js";
 export default class MotivoCancelamento {
 
-    #cpf;
+    #cod;
     #nome;
     #motivo;
 
-    constructor(cpf, nome, motivo) {
-        this.#cpf = cpf;
+    constructor(cod, nome, motivo) {
+        this.#cod = cod;
         this.#nome = nome;
         this.#motivo = motivo
     }
 
     
 
-    get cpf() {
-        return this.#cpf;
+    get cod() {
+        return this.#cod;
     }
 
-    set cpf(novoCpf) {
-        this.#cpf = novoCpf;
+    set cod(newCod) {
+        this.#cod = newCod;
     }
 
     get nome() {
@@ -40,7 +40,7 @@ export default class MotivoCancelamento {
     //formato JSON de um objeto
     toJSON(){
         return {
-            "cpf": this.#cpf,
+            "cod": this.#cod,
             "nome": this.#nome,
             "motivo": this.#motivo
         }
@@ -66,8 +66,8 @@ export default class MotivoCancelamento {
         return await candDB.consultar(this);
     }
 
-    async consultarPelaChave(cpf){
+    async consultarPelaChave(cod){
         const candDB = new MotivoDB();
-        return await candDB.consultarPelaChave(cpf);
+        return await candDB.consultarPelaChave(cod);
     }
 }

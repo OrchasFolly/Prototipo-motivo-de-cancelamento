@@ -9,7 +9,7 @@ rotaMotivo.post('/', motivoControl.gravar)
 .put('/',motivoControl.alterar)
 .delete('/',motivoControl.excluir)
 .get('/',motivoControl.consultar)
-.get('/:cpf',motivoControl.consultar);
+.get('/:cod',motivoControl.consultar);
 
 export default rotaMotivo;
 

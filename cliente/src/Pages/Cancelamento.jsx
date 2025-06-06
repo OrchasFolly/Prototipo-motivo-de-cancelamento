@@ -1,7 +1,7 @@
 import './Cancelamento.css';
 import Form from 'react-bootstrap/Form';
 import fetchService from '../services/fetchService.js';
-import ButtonPrimary from '../components/ButtonPrimary';
+import ButtonPrimary from '../Components/Buttons/ButtonPrimary.jsx';
 import ListaCancelamento from './ListaCancelamento.jsx';
 import { Col, Row } from 'react-bootstrap';
 import { TiArrowSortedDown } from 'react-icons/ti';
@@ -19,12 +19,9 @@ function Cancelamento() {
 
   const handleValidation = (event) => {
     const form = event.currentTarget;
-    const cpf = document.getElementById("cpfValid").value;
-    const alertCPF = document.getElementById("alertCPF");
-    if (!form.checkValidity() || !fetchService.checkCPF(cpf)){
+    if (!form.checkValidity()){
       event.preventDefault();
       event.stopPropagation();
-      alertCPF.style.display = !fetchService.checkCPF(cpf) ? "flex" : "none";
       form.classList.add('was-validated');
     }
     else{
@@ -67,15 +64,14 @@ function Cancelamento() {
 
           <Row>
             <Form.Label className="col-form">
-              CPF
+              Identificação
               <Form.Group>
                 <input
-                  id="cpfValid"
+                  id="codIdentify"
                   name="cpfForm"
                   type="text"
                   size={40}
                   maxLength={14}
-                  required
                 />
                 <small id="alertCPF" className="alertCode" variant="danger">
                   Informe um CPF valido
@@ -133,6 +129,7 @@ function Cancelamento() {
                 type={"reset"}
                 variant={"secondary"}
                 title={"Limpar"}
+                anyEvent={() => {fetchService.resetForm()}}
               />
             </Col>
           </Row>

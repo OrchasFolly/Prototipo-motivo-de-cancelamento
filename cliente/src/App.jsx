@@ -2,7 +2,8 @@ import './styles/App.css'
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import Cancelamento from './Pages/Cancelamento.jsx'
 import TopBar from './Components/TopBar.jsx'
-import ListaCancelamento from './Pages/ListaCancelamento';
+import Motivo from './Pages/MotivoCancelamento.jsx';
+import AlertMessage from './Components/Alerts/AlertMessage.jsx';
 
 function App() {
 
@@ -18,9 +19,10 @@ function App() {
       <div className="App-header">
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Cancelamento/>}/>
+            <Route path="/" element={<Motivo/>}/>
           </Routes>
         </BrowserRouter>
+        <AlertMessage/>
       </div>
     </>
   )

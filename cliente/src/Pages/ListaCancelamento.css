@@ -1,15 +1,8 @@
 .App-header-list {
-  display: none;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.inputList {
-  width: 300px;
-  height: 30px;
-  margin: 5px;
-  font-size: medium;
 }
 
 /* Funções da tabela */
@@ -23,8 +16,20 @@
   scroll-snap-align: start;
 }
 
+.spaceRow {
+  display: flex;
+  justify-content: space-between;
+  background-color: #375772;
+  width: 100%;
+  height: 100%;
+}
+
 .colWidth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 200px;
+  height: 50px;
 }
 
 .btnTable {
@@ -32,22 +37,21 @@
 }
 
 .tabScroll {
-  background-color: #fcfcfc42;
   overflow-x: auto;
   scrollbar-width: thin;
   scrollbar-color: #fcfcfc42 #282c38;
   scroll-snap-type: y mandatory;
   font-size: medium;
-  width: 400px;
+  width: 100%;
 }
 
 .tabScrollDesc {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   overflow-x: auto;
   scrollbar-width:none;
   scroll-snap-type: y mandatory;
-  width: 450px;
+  width: 100%;
 }
 
 .tabScroll:hover {
@@ -58,5 +62,8 @@
 @media (width <= 670px){
   .tabScroll {
     width: 300px;
+  }
+  .tabScrollDesc {
+    width: 500px;
   }
 }

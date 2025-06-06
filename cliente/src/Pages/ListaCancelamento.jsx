@@ -1,25 +1,12 @@
 import './ListaCancelamento.css';
-import fetchService from '../services/fetchService';
-import ButtonPrimary from '../components/ButtonPrimary';
+import ButtonPrimary from '../Components/Buttons/ButtonPrimary';
 import { RxReload } from 'react-icons/rx';
-
-function handleSearch() {
-  const item = document.getElementById("search").value;
-  fetchService.exibindoTabela(item);
-}
+import fetchService from '../services/fetchService';
 
 function ListaCancelamento() {
   return (
     <>
       <table id="list" className="tableStyle App-header-list">
-        <thead>
-          <tr>
-            <td>
-              Lista de cancelamentos
-              <input id="search" className="inputList" type="text" placeholder="Search" onChange={handleSearch}/>
-            </td>
-          </tr>
-        </thead>
         <tbody id="get-tab" className="tabScroll">
         </tbody>
         <tfoot>
@@ -28,8 +15,8 @@ function ListaCancelamento() {
               <ButtonPrimary
                 type={"button"}
                 title={<RxReload/>}
-                variant={"outline-light"} 
-                anyEvent={() => {location.reload()}}
+                variant={"outline-light"}
+                anyEvent={() => {fetchService.exibindoTabela()}}
               />
             </td>
           </tr>

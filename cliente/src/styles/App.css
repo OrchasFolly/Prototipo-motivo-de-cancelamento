@@ -39,7 +39,7 @@ button, input {
 
 @media (height <= 915px ) and (width >= 344px){
   .App-header {
-    min-height: 120vh;
+    min-height: 130vh;
   }
 }
 

@@ -1,49 +1,5 @@
 const endpoint = "http://localhost:5174/motivos";
 
-function checkCPF(cpf){
-    cpf = cpf.replace(/\D/g,"");
-    if(cpf.length !== 11){
-        return false;
-    }
-
-    if ([
-        '00000000000',
-        '11111111111',
-        '22222222222',
-        '33333333333',
-        '44444444444',
-        '55555555555',
-        '66666666666',
-        '77777777777',
-        '88888888888',
-        '99999999999',
-        ].indexOf(cpf) !== -1){;
-        return false;
-        }
-
-    let soma = 0;
-    let resto;
-    for (let i = 1; i <= 9; i++)
-        soma += parseInt(cpf.charAt(i - 1)) * (11 - i);
-
-    resto = (soma * 10) % 11;
-
-    if (resto === 10 || resto === 11) resto = 0;
-    if (resto !== parseInt(cpf.charAt(9))) return false;
-
-    soma = 0;
-
-    for (let i = 1; i <= 10; i++)
-        soma += parseInt(cpf.charAt(i - 1)) * (12 - i);
-
-    resto = (soma * 10) % 11;
-
-    if (resto === 10 || resto === 11)
-        resto = 0;
-      
-    return resto === parseInt(cpf.charAt(10));
-}
-
 function showMessage(mensagem, tipo="success"){
     const alert = document.getElementById("alert-message");
     alert.innerHTML = `<div class="alert alert-${tipo} sm" role="alert">Mensagem: ${mensagem}</div>`
@@ -53,12 +9,12 @@ function showMessage(mensagem, tipo="success"){
 }
 
 function pegandoDados(){
-    const cpf = document.getElementById("cpfValid").value;
+    const cod = document.getElementById("codIdentify").value;
     const nome = document.getElementById("nameValid").value;
     const motivo = document.getElementById("motivoValid").value;
 
     return {
-        "cpf": cpf,
+        "cod": cod,
         "nome": nome,
         "motivo": motivo
     }
@@ -75,29 +31,42 @@ function exibindoTabela(CPF = ""){
             if (items.length > 0){
                 const divTable = document.getElementById("get-tab");
                 divTable.innerHTML = "";
+                const header = document.createElement("tr");
+                header.classList.add("spaceRow");
+                header.innerHTML = `
+                    <th class="colWidth">Código</th>
+                    <th class="colWidth">Nome</th>
+                    <th class="colWidth">Ações</th>
+                `
+                const card = document.createElement("tbody");
+                card.classList.add("tabScrollDesc");
+                card.appendChild(header)
 
                 for (let i = 0; i < items.length; i++){
-                    const card = document.createElement("tbody");
-                    card.classList.add("tabScrollDesc");
                     const row = document.createElement("tr");
+                    row.classList.add("spaceRow")
                     row.innerHTML = `
-                    <td class="colWidth">${items[i].cpf}</td>
-                    <td class="colWidth">${items[i].nome}</td>
+                        <td class="colWidth">${items[i].cod}</td>
+                        <td class="colWidth">${items[i].nome}</td>
                     `
                     const col = document.createElement("td");
                     col.classList.add("colWidth");
                     const btnDel = document.createElement('BUTTON');
-                    const labelDel = document.createTextNode("Excluir");        
+                    const labelDel = document.createTextNode("Excluir");    
                     btnDel.appendChild(labelDel);
                     btnDel.classList.add("btn","btn-danger","btn-sm","btnTable");
                     btnDel.onclick = function()
-                    {
+                    {   
+                        const alert = document.getElementById("AlertMessage");
+                        const blockForm = document.getElementById("block");
+                        blockForm.style.pointerEvents = "none";
+                        blockForm.style.opacity = 0.5;
+                        alert.style.display = "flex";
                         btnPegarDados(
-                            items[i].cpf,
+                            items[i].cod,
                             items[i].nome,
                             items[i].motivo,'excluir'
                         )
-                        excluindo()
                     }
                     col.appendChild(btnDel);
                     const btnUp = document.createElement('BUTTON');
@@ -107,16 +76,16 @@ function exibindoTabela(CPF = ""){
                     btnUp.onclick = function()
                     {
                         btnPegarDados(
-                            items[i].cpf,
+                            items[i].cod,
                             items[i].nome,
                             items[i].motivo,'atualizar'
                         )
                     }
                     col.appendChild(btnUp); 
                     row.appendChild(col);
-                    card.appendChild(row)
-                    divTable.appendChild(card);
+                    card.appendChild(row);
                 }
+                divTable.appendChild(card);
             }
             else{
                 showMessage("Não há motivo", "warning");
@@ -159,7 +128,7 @@ function excluindo(){
         method: "DELETE",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
-            cpf: document.getElementById("cpfValid").value
+            cod: document.getElementById("codIdentify").value
         })
     }).then((resposta) => {
         return resposta.json();
@@ -197,8 +166,8 @@ function atualizando(){
     });
 }
 
-function btnPegarDados(cpf, nome, motivo, msg){
-    document.getElementById("cpfValid").value = cpf;
+function btnPegarDados(cod, nome, motivo, msg = "atualizar"){
+    document.getElementById("codIdentify").value = cod;
     document.getElementById("nameValid").value = nome;
     document.getElementById("motivoValid").value = motivo;
 
@@ -206,13 +175,28 @@ function btnPegarDados(cpf, nome, motivo, msg){
         document.getElementById("atualizar").disabled = false;
         document.getElementById("registrar").disabled = true;
     }
+
+}
+
+function resetForm(){
+    document.getElementById("atualizar").disabled = true;
+    document.getElementById("registrar").disabled = false;
+    document.getElementById("codIdentify").value = "";
+    document.getElementById("nameValid").value = "";
+    document.getElementById("motivoValid").value = "";
+    const alert = document.getElementById("AlertMessage");
+    const blockForm = document.getElementById("block");
+    blockForm.style.pointerEvents = "auto";
+    blockForm.style.opacity = 1;
+    alert.style.display = "none";
 }
 
 const fetchService = {
     registrando,
     atualizando,
+    excluindo,
     exibindoTabela,
-    checkCPF
+    resetForm
 }
 exibindoTabela()
 

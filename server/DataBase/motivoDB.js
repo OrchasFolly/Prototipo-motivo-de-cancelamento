@@ -10,7 +10,7 @@ export default class MotivoDB{
         try {
             const conexao = await conection();
             const sql = `CREATE TABLE IF NOT EXISTS cancelamento (
-                cpf VARCHAR(14) NOT NULL PRIMARY KEY,
+                cod INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
                 nome VARCHAR(100) NOT NULL,
                 motivo VARCHAR(255) NOT NULL
             )`;
@@ -24,10 +24,9 @@ export default class MotivoDB{
         if (cliente instanceof MotivoCancelamento){
             try {
                 const conexao = await conection();
-                const sql = `INSERT INTO cancelamento (cpf, nome, motivo)
-                            VALUES ( ?, ?, ?)`;
+                const sql = `INSERT INTO cancelamento (nome, motivo)
+                            VALUES (?, ?)`;
                 const parametros = [
-                    cliente.cpf,
                     cliente.nome,
                     cliente.motivo
                 ];
@@ -46,11 +45,11 @@ export default class MotivoDB{
                 const conexao = await conection();
                 const sql = `UPDATE cancelamento SET 
                             nome = ?, motivo = ?
-                            WHERE cpf = ?`;            
+                            WHERE cod = ?`;            
                 const parametros = [
                     cliente.nome,
                     cliente.motivo,
-                    cliente.cpf
+                    cliente.cod
                 ];
                 await conexao.execute(sql, parametros);
                 await conexao.release();
@@ -64,8 +63,8 @@ export default class MotivoDB{
         if (cliente instanceof MotivoCancelamento){
             try {
                 const conexao = await conection();
-                const sql = `DELETE FROM cancelamento WHERE cpf = ?`;
-                const parametros = [cliente.cpf];
+                const sql = `DELETE FROM cancelamento WHERE cod = ?`;
+                const parametros = [cliente.cod];
                 await conexao.execute(sql, parametros);
                 await conexao.release();
             } catch ( erro ) {
@@ -81,7 +80,7 @@ export default class MotivoDB{
         await conexao.release();
         let listaMotivos = [];
         for (const registro of registros){
-            const cliente = new MotivoCancelamento(registro.cpf,
+            const cliente = new MotivoCancelamento(registro.cod,
                                         registro.nome,
                                         registro.motivo
                                         );
@@ -91,14 +90,14 @@ export default class MotivoDB{
         return listaMotivos;
     }
     
-    async consultarPelaChave(cpf){
+    async consultarPelaChave(cod){
         const conexao = await conection();
-        const sql = `SELECT * FROM cancelamento WHERE cpf = ?`;
-        const [registros, campos] = await conexao.execute(sql, [cpf]);
+        const sql = `SELECT * FROM cancelamento WHERE cod = ?`;
+        const [registros, campos] = await conexao.execute(sql, [cod]);
         await conexao.release();
         let listaMotivos = [];
         for (const registro of registros){
-            const cliente = new MotivoCancelamento(registro.cpf,
+            const cliente = new MotivoCancelamento(registro.cod,
                                         registro.nome,
                                         registro.motivo
                                         );
