@@ -13,7 +13,7 @@ export default async function conection() {
             password: '',
             waitForConnections: true,
             connectionLimit: 500,
-            maxIdle: 100, // max idle connections, the default value is the same as `connectionLimit`
+            maxIdle: 500, // max idle connections, the default value is the same as `connectionLimit`
             idleTimeout: 60000, // idle connections timeout, in milliseconds, the default value 60000
             queueLimit: 0,
             enableKeepAlive: true,

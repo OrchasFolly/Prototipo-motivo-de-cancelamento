@@ -4,6 +4,12 @@ import { RxReload } from 'react-icons/rx';
 import fetchService from '../services/fetchService';
 
 function ListaCancelamento() {
+  
+  const handleLoad = () => {
+    fetchService.exibindoTabela()
+  }
+  handleLoad()
+
   return (
     <>
       <table id="list" className="tableStyle App-header-list">
@@ -15,8 +21,8 @@ function ListaCancelamento() {
               <ButtonPrimary
                 type={"button"}
                 title={<RxReload/>}
-                variant={"outline-light"}
-                anyEvent={() => {fetchService.exibindoTabela()}}
+                variant={"outline-dark"}
+                anyEvent={handleLoad}
               />
             </td>
           </tr>

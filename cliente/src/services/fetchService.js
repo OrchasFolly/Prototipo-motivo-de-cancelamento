@@ -28,9 +28,9 @@ function exibindoTabela(CPF = ""){
     }).then((dataResponse) => {
         if (dataResponse.status){
             const items = dataResponse.clientes;
+            const divTable = document.getElementById("get-tab");
+            divTable.innerHTML = "";
             if (items.length > 0){
-                const divTable = document.getElementById("get-tab");
-                divTable.innerHTML = "";
                 const header = document.createElement("tr");
                 header.classList.add("spaceRow");
                 header.innerHTML = `
@@ -57,11 +57,11 @@ function exibindoTabela(CPF = ""){
                     btnDel.classList.add("btn","btn-danger","btn-sm","btnTable");
                     btnDel.onclick = function()
                     {   
-                        const alert = document.getElementById("AlertMessage");
+                        const delAlert = document.getElementById("deleteMessage");
                         const blockForm = document.getElementById("block");
                         blockForm.style.pointerEvents = "none";
                         blockForm.style.opacity = 0.5;
-                        alert.style.display = "flex";
+                        delAlert.style.display = "flex";
                         btnPegarDados(
                             items[i].cod,
                             items[i].nome,
@@ -113,6 +113,7 @@ function registrando(){
     }).then((dadosRecebidos) => {
         if (dadosRecebidos.status){
             showMessage(dadosRecebidos.mensagem, "success");
+            exibindoTabela()
         }
         else{
             showMessage(dadosRecebidos.mensagem, "danger");
@@ -135,6 +136,7 @@ function excluindo(){
     }).then((dadosRecebidos) => {
         if (dadosRecebidos.status){
             showMessage(dadosRecebidos.mensagem, "success");
+            exibindoTabela()
         }
         else{
             showMessage(dadosRecebidos.mensagem, "danger");
@@ -156,6 +158,7 @@ function atualizando(){
     }).then((dadosRecebidos) => {
         if (dadosRecebidos.status){
             showMessage(dadosRecebidos.mensagem, "success");
+            exibindoTabela()
         }
         else{
             showMessage(dadosRecebidos.mensagem, "danger");
@@ -184,11 +187,13 @@ function resetForm(){
     document.getElementById("codIdentify").value = "";
     document.getElementById("nameValid").value = "";
     document.getElementById("motivoValid").value = "";
-    const alert = document.getElementById("AlertMessage");
+    const control = document.getElementById("codControl");
+    const delAlert = document.getElementById("deleteMessage");
     const blockForm = document.getElementById("block");
     blockForm.style.pointerEvents = "auto";
     blockForm.style.opacity = 1;
-    alert.style.display = "none";
+    control.style.display = "none";
+    delAlert.style.display = "none";
 }
 
 const fetchService = {

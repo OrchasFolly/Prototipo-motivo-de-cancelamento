@@ -5,18 +5,18 @@ import fetchService from '../../services/fetchService';
 
 function AlertMessage() {
 
-  const handleCancel = () => {
+  const handleReset = () => {
     fetchService.resetForm()
   }
 
-  const handleExcluir = () => {
+  const handleDelete = () => {
     fetchService.excluindo()
     fetchService.resetForm()
   }
 
   return (
     <>
-        <Alert id="AlertMessage" className="alertMsg" variant="danger">
+        <Alert id="deleteMessage" className="alertMsg" variant="danger">
             <Alert.Heading>Warning</Alert.Heading>
             <p>
             Deseja realmente excluir?
@@ -24,10 +24,10 @@ function AlertMessage() {
             <hr />
             <div className="d-flex justify-content-end">
                 <ButtonPrimary type={"button"} variant={"secondary"} title={"Cancel"}
-                    anyEvent={handleCancel}
+                    anyEvent={handleReset}
                 />
                 <ButtonPrimary type={"button"} variant={"danger"} title={"Excluir"}
-                    anyEvent={handleExcluir}
+                    anyEvent={handleDelete}
                 />
             </div>
         </Alert>

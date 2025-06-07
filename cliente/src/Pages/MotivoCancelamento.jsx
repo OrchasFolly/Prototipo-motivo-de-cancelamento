@@ -7,39 +7,35 @@ import { Col, Row } from 'react-bootstrap';
 import { useState } from 'react';
 
 function Motivo() {
+
   const [open, openList] = useState(false);
 
-  function hangleDisplay(){
+  const hangleDisplay = () => {
     openList(!open);
     let change = document.getElementById("exib");
     change.style.display = !open ? "flex" : "none";
   }
 
-  function handleSearch() {
+  const handleSearch = () => {
     const item = document.getElementById("search").value;
     fetchService.exibindoTabela(item);
   }
+  
+  const handleReset = () => {
+    fetchService.resetForm()
+  }
 
   const handleValidation = (event) => {
-      const form = event.currentTarget;
-      if (!form.checkValidity()){
-        event.preventDefault();
-        event.stopPropagation();
-        form.classList.add('was-validated');
-      }
-      else{
-        form.classList.add('was-validated');
-        !document.getElementById("registrar").disabled ? fetchService.registrando() : fetchService.atualizando();
-        fetchService.exibindoTabela();
+    const form = event.currentTarget;
+    if (!form.checkValidity()){
+      event.preventDefault();
+      event.stopPropagation();
+      form.classList.add('was-validated');
     }
-  }
-
-  const handleAtualizar = () => {
-    document.getElementById("atualizar").onClick = fetchService.atualizando;
-  }
-
-  const handleRegistrar = () => {
-    document.getElementById("registrar").onClick = fetchService.registrando;
+    else{
+      form.classList.add('was-validated');
+      !document.getElementById("registrar").disabled ? fetchService.registrando() : fetchService.atualizando();
+    }
   }
 
   return (
@@ -54,7 +50,7 @@ function Motivo() {
                 <Form.Label>Nome</Form.Label>
                 <Form.Control id="nameValid" type="text" minLength={3} maxLength={40} required/>
             </Form.Group>
-            <Form.Group as={Col} className="mb-1" mb="3">
+            <Form.Group as={Col} className="mb-1" mb="3" id="codControl">
                 <Form.Label>Código</Form.Label>
                 <Form.Control id="codIdentify" type="text"/>
             </Form.Group>
@@ -63,24 +59,24 @@ function Motivo() {
             <Form.Group className="mb-3">
                 <Form.Label>Motivo</Form.Label>
                 <Form.Control id="motivoValid" as="textarea" minLength={10}
-                    maxLength={255} rows={3} placeholder="Descreva" required/>
+                    maxLength={255} rows={3} required/>
             </Form.Group>
           </Row>
           <Row className="ButtonBox">
             <Col className="PrimaryGroup">
                 <ButtonPrimary id={"registrar"} type={"submit"} variant={"success"}
-                    title={"Registrar"} anyEvent={() => {handleRegistrar}}
+                  title={"Registrar"}
                 />
-                <ButtonPrimary id={"atualizar"} type="submit" variant={"warning"} title={"Atualizar"}
-                    anyEvent={() => {handleAtualizar}} disabled={true}
+                <ButtonPrimary id={"atualizar"} type="submit" variant={"warning"}
+                  title={"Atualizar"} disabled={true}
                 />
                 <ButtonPrimary type={"reset"} variant={"secondary"} title={"Limpar"}
-                    anyEvent={() => {fetchService.resetForm()}}
+                  anyEvent={handleReset}
                 />
             </Col>
             <Col className="SecondaryGroup">
                 <ButtonPrimary type={"button"} variant={"secondary"} title={!open ? "Mostrar" : "Esconder"}
-                    anyEvent={hangleDisplay}
+                  anyEvent={hangleDisplay}
                 />
             </Col>
           </Row>
