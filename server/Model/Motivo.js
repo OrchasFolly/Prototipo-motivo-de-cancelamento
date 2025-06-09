@@ -66,8 +66,8 @@ export default class MotivoCancelamento {
         return await candDB.consultar(this);
     }
 
-    async consultarPelaChave(cod){
+    async consultarPelaChave(key){
         const candDB = new MotivoDB();
-        return await candDB.consultarPelaChave(cod);
+        return await candDB.consultarPelaChave(key);
     }
 }

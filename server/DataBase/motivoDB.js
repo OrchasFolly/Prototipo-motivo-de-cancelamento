@@ -90,10 +90,10 @@ export default class MotivoDB{
         return listaMotivos;
     }
     
-    async consultarPelaChave(cod){
+    async consultarPelaChave(key){
         const conexao = await conection();
-        const sql = `SELECT * FROM cancelamento WHERE cod = ?`;
-        const [registros, campos] = await conexao.execute(sql, [cod]);
+        const sql = `SELECT * FROM cancelamento WHERE nome LIKE '%${key}%' OR cod LIKE '%${key}%'`;
+        const [registros, campos] = await conexao.execute(sql, [key]);
         await conexao.release();
         let listaMotivos = [];
         for (const registro of registros){

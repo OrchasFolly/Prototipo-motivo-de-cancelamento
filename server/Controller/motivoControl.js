@@ -122,8 +122,8 @@ export default class MotivoControl{
         if(requisicao.method === "GET"){
             const cliente = new MotivoCancelamento();
 
-            if (requisicao.params.cod){
-                cliente.consultarPelaChave(requisicao.params.cod).then((listaMotivos) => {
+            if (requisicao.params.key){
+                cliente.consultarPelaChave(requisicao.params.key).then((listaMotivos) => {
                         resposta.status(200).json(
                             {
                                 "status": true,

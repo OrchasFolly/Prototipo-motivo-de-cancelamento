@@ -24,6 +24,10 @@
   height: 100%;
 }
 
+.spaceRow:hover {
+  background-color: #44865d;
+}
+
 .colWidth {
   display: flex;
   align-items: center;

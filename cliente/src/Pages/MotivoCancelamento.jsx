@@ -84,7 +84,7 @@ function Motivo() {
         </Form>
         <div id="exib">
             <div className="alignSearch">
-                <input id="search" className="searchItem" type="text" placeholder="Search" onChange={handleSearch}/>
+                <input id="search" className="searchItem" placeholder="Search" onChange={handleSearch}/>
             </div>
             <ListaCancelamento/>
         </div>

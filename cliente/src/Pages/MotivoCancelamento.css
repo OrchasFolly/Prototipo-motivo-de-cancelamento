@@ -30,6 +30,10 @@
   font-size: medium;
 }
 
+.searchItem:focus {
+  outline:solid 4px #3c7451;
+}
+
 #codControl {
   display: none;
 }

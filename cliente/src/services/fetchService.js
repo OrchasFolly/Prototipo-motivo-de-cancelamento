@@ -20,8 +20,8 @@ function pegandoDados(){
     }
 }
 
-function exibindoTabela(CPF = ""){
-    fetch(`${endpoint}/${CPF}`, {
+function exibindoTabela(Key = ""){
+    fetch(`${endpoint}/${Key}`, {
         method: "GET"
     }).then((resposta) => {
         return resposta.json();
