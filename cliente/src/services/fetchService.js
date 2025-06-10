@@ -1,3 +1,4 @@
+const endpointPaciente = "http://localhost:5174/pacientes";
 const endpoint = "http://localhost:5174/motivos";
 
 function showMessage(mensagem, tipo="success"){
@@ -89,6 +90,36 @@ function exibindoTabela(Key = ""){
             }
             else{
                 showMessage("Não há motivo", "warning");
+            }
+        }
+        else{
+            showMessage(dataResponse.mensagem, "danger");
+        }
+
+    }).catch((erro) => {
+        showMessage(erro, "warning");
+    })
+}
+
+function exibindoNome(){
+    fetch(`${endpointPaciente}`, {
+        method: "GET"
+    }).then((resposta) => {
+        return resposta.json();
+    }).then((dataResponse) => {
+        if (dataResponse.status){
+            const items = dataResponse.pacientes;
+            const select = document.getElementById("nameValid");
+            if (items.length > 0){
+
+                for (let i = 0; i < items.length; i++){
+                    const option1 = document.createElement('option');
+                    option1.text = items[i].nome;
+                    select.appendChild(option1);
+                }
+            }
+            else{
+                showMessage("Não há paciente?", "warning");
             }
         }
         else{
@@ -203,6 +234,7 @@ const fetchService = {
     exibindoTabela,
     resetForm
 }
-exibindoTabela()
+exibindoTabela();
+exibindoNome();
 
 export default fetchService;
