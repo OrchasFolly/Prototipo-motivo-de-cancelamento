@@ -2,12 +2,10 @@ import MotivoDB from "../DataBase/motivoDB.js";
 export default class MotivoCancelamento {
 
     #cod;
-    #nome;
     #motivo;
 
-    constructor(cod, nome, motivo) {
+    constructor(cod, motivo) {
         this.#cod = cod;
-        this.#nome = nome;
         this.#motivo = motivo
     }
 
@@ -19,14 +17,6 @@ export default class MotivoCancelamento {
 
     set cod(newCod) {
         this.#cod = newCod;
-    }
-
-    get nome() {
-        return this.#nome;
-    }
-
-    set nome(novoNome) {    
-        this.#nome = novoNome;
     }
 
     get motivo() {
@@ -41,7 +31,6 @@ export default class MotivoCancelamento {
     toJSON(){
         return {
             "cod": this.#cod,
-            "nome": this.#nome,
             "motivo": this.#motivo
         }
     }

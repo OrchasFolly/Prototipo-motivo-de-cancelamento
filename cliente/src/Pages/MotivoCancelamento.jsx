@@ -46,13 +46,6 @@ function Motivo() {
             <h1>Motivo de cancelamento</h1>
           </Row>
           <Row className="mb-3">
-            <Form.Group as={Col} className="mb-3" md="9">
-                <Form.Label>Nome</Form.Label>
-                {/* <Form.Control id="nameValid" type="text" minLength={3} maxLength={40} required/> */}
-                <Form.Select id="nameValid" aria-label="Default select example" requireds>
-                  <option>Selecione um nome</option>
-                </Form.Select>
-            </Form.Group>
             <Form.Group as={Col} className="mb-1" mb="3" id="codControl">
                 <Form.Label>Código</Form.Label>
                 <Form.Control id="codIdentify" type="text"/>

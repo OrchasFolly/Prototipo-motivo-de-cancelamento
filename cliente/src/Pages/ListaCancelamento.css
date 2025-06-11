@@ -28,12 +28,19 @@
   background-color: #44865d;
 }
 
-.colWidth {
+.spaceCol {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 200px;
   height: 50px;
+}
+
+.spaceName {
+  display: flex;
+  align-items: center;
+  text-align: justify;
+  width: 380px;
 }
 
 .btnTable {
@@ -64,6 +71,9 @@
 }
 
 @media (width <= 670px){
+  .spaceName {
+    width: 200px;
+  }
   .tabScroll {
     width: 300px;
   }

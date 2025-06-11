@@ -1,4 +1,3 @@
-const endpointPaciente = "http://localhost:5174/pacientes";
 const endpoint = "http://localhost:5174/motivos";
 
 function showMessage(mensagem, tipo="success"){
@@ -11,12 +10,10 @@ function showMessage(mensagem, tipo="success"){
 
 function pegandoDados(){
     const cod = document.getElementById("codIdentify").value;
-    const nome = document.getElementById("nameValid").value;
     const motivo = document.getElementById("motivoValid").value;
 
     return {
         "cod": cod,
-        "nome": nome,
         "motivo": motivo
     }
 }
@@ -35,9 +32,9 @@ function exibindoTabela(Key = ""){
                 const header = document.createElement("tr");
                 header.classList.add("spaceRow");
                 header.innerHTML = `
-                    <th class="colWidth">Código</th>
-                    <th class="colWidth">Nome</th>
-                    <th class="colWidth">Ações</th>
+                    <th class="spaceCol">Código</th>
+                    <th class="spaceCol">Motivo</th>
+                    <th class="spaceCol">Ações</th>
                 `
                 const card = document.createElement("tbody");
                 card.classList.add("tabScrollDesc");
@@ -47,11 +44,12 @@ function exibindoTabela(Key = ""){
                     const row = document.createElement("tr");
                     row.classList.add("spaceRow")
                     row.innerHTML = `
-                        <td class="colWidth">${items[i].cod}</td>
-                        <td class="colWidth">${items[i].nome}</td>
+                        <td class="spaceCol">${items[i].cod}</td>
+                        <td class="spaceName">${items[i].motivo}</td>
                     `
+
                     const col = document.createElement("td");
-                    col.classList.add("colWidth");
+                    col.classList.add("spaceCol");
                     const btnDel = document.createElement('BUTTON');
                     const labelDel = document.createTextNode("Excluir");    
                     btnDel.appendChild(labelDel);
@@ -65,7 +63,6 @@ function exibindoTabela(Key = ""){
                         delAlert.style.display = "flex";
                         btnPegarDados(
                             items[i].cod,
-                            items[i].nome,
                             items[i].motivo,'excluir'
                         )
                     }
@@ -78,11 +75,10 @@ function exibindoTabela(Key = ""){
                     {
                         btnPegarDados(
                             items[i].cod,
-                            items[i].nome,
                             items[i].motivo,'atualizar'
                         )
                     }
-                    col.appendChild(btnUp); 
+                    col.appendChild(btnUp);
                     row.appendChild(col);
                     card.appendChild(row);
                 }
@@ -90,36 +86,6 @@ function exibindoTabela(Key = ""){
             }
             else{
                 showMessage("Não há motivo", "warning");
-            }
-        }
-        else{
-            showMessage(dataResponse.mensagem, "danger");
-        }
-
-    }).catch((erro) => {
-        showMessage(erro, "warning");
-    })
-}
-
-function exibindoNome(){
-    fetch(`${endpointPaciente}`, {
-        method: "GET"
-    }).then((resposta) => {
-        return resposta.json();
-    }).then((dataResponse) => {
-        if (dataResponse.status){
-            const items = dataResponse.pacientes;
-            const select = document.getElementById("nameValid");
-            if (items.length > 0){
-
-                for (let i = 0; i < items.length; i++){
-                    const option1 = document.createElement('option');
-                    option1.text = items[i].nome;
-                    select.appendChild(option1);
-                }
-            }
-            else{
-                showMessage("Não há paciente?", "warning");
             }
         }
         else{
@@ -200,9 +166,8 @@ function atualizando(){
     });
 }
 
-function btnPegarDados(cod, nome, motivo, msg = "atualizar"){
+function btnPegarDados(cod, motivo, msg = "atualizar"){
     document.getElementById("codIdentify").value = cod;
-    document.getElementById("nameValid").value = nome;
     document.getElementById("motivoValid").value = motivo;
 
     if (msg === "atualizar"){
@@ -216,7 +181,6 @@ function resetForm(){
     document.getElementById("atualizar").disabled = true;
     document.getElementById("registrar").disabled = false;
     document.getElementById("codIdentify").value = "";
-    document.getElementById("nameValid").value = "";
     document.getElementById("motivoValid").value = "";
     const control = document.getElementById("codControl");
     const delAlert = document.getElementById("deleteMessage");
@@ -235,6 +199,5 @@ const fetchService = {
     resetForm
 }
 exibindoTabela();
-exibindoNome();
 
 export default fetchService;

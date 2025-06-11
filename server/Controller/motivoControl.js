@@ -7,11 +7,10 @@ export default class MotivoControl{
 
         if(requisicao.method === "POST" && requisicao.is('application/json')){
             const dados = requisicao.body;
-            const nome = dados.nome;
             const motivo = dados.motivo;
 
-            if(nome && motivo){
-                const cliente = new MotivoCancelamento(null, nome, motivo);
+            if(motivo){
+                const cliente = new MotivoCancelamento(null, motivo);
                 cliente.gravar().then(() => {
                     resposta.status(200).json({
                         status: true,
@@ -46,11 +45,10 @@ export default class MotivoControl{
         if(requisicao.method === "PUT" && requisicao.is('application/json')){
             const dados = requisicao.body;
             const cod = dados.cod;
-            const nome = dados.nome;
             const motivo = dados.motivo;
 
-            if(cod && nome && motivo){
-                const cliente = new MotivoCancelamento(cod, nome, motivo);
+            if(cod && motivo){
+                const cliente = new MotivoCancelamento(cod, motivo);
                 cliente.alterar().then(() => {
                     resposta.status(200).json({
                         status: true,

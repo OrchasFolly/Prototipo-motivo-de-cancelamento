@@ -11,7 +11,6 @@ export default class MotivoDB{
             const conexao = await conection();
             const sql = `CREATE TABLE IF NOT EXISTS cancelamento (
                 cod INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-                nome VARCHAR(100) NOT NULL,
                 motivo VARCHAR(255) NOT NULL
             )`;
             await conexao.execute(sql);
@@ -24,10 +23,9 @@ export default class MotivoDB{
         if (cliente instanceof MotivoCancelamento){
             try {
                 const conexao = await conection();
-                const sql = `INSERT INTO cancelamento (nome, motivo)
-                            VALUES (?, ?)`;
+                const sql = `INSERT INTO cancelamento (motivo)
+                            VALUES (?)`;
                 const parametros = [
-                    cliente.nome,
                     cliente.motivo
                 ];
 
@@ -44,10 +42,9 @@ export default class MotivoDB{
             try {
                 const conexao = await conection();
                 const sql = `UPDATE cancelamento SET 
-                            nome = ?, motivo = ?
+                            motivo = ?
                             WHERE cod = ?`;            
                 const parametros = [
-                    cliente.nome,
                     cliente.motivo,
                     cliente.cod
                 ];
@@ -75,13 +72,12 @@ export default class MotivoDB{
 
     async consultar(){
         const conexao = await conection();
-        const sql = `SELECT * FROM cancelamento ORDER BY nome`;
+        const sql = `SELECT * FROM cancelamento ORDER BY motivo`;
         const [registros, campos] = await conexao.execute(sql);
         await conexao.release();
         let listaMotivos = [];
         for (const registro of registros){
             const cliente = new MotivoCancelamento(registro.cod,
-                                        registro.nome,
                                         registro.motivo
                                         );
             listaMotivos.push(cliente);
@@ -92,13 +88,12 @@ export default class MotivoDB{
     
     async consultarPelaChave(key){
         const conexao = await conection();
-        const sql = `SELECT * FROM cancelamento WHERE nome LIKE '%${key}%' OR cod LIKE '%${key}%'`;
+        const sql = `SELECT * FROM cancelamento WHERE motivo LIKE '%${key}%' OR cod LIKE '%${key}%'`;
         const [registros, campos] = await conexao.execute(sql, [key]);
         await conexao.release();
         let listaMotivos = [];
         for (const registro of registros){
             const cliente = new MotivoCancelamento(registro.cod,
-                                        registro.nome,
                                         registro.motivo
                                         );
             listaMotivos.push(cliente);

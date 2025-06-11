@@ -1,6 +1,5 @@
 import './styles/App.css'
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import Cancelamento from './Pages/Cancelamento.jsx'
 import TopBar from './Components/TopBar.jsx'
 import Motivo from './Pages/MotivoCancelamento.jsx';
 import AlertMessage from './Components/Alerts/AlertMessage.jsx';

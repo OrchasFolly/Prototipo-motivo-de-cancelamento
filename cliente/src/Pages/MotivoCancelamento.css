@@ -17,6 +17,18 @@
   border-top-right-radius: 20px;
 }
 
+.title {
+  text-align: center;
+  font-size: 100%;
+}
+
+.alert {
+  display: flex;
+  align-items: center;
+  font-size: small;
+  height: 20px;
+}
+
 .alignSearch {
   display: flex;
   justify-content: end;
