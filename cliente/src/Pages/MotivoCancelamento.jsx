@@ -47,15 +47,15 @@ function Motivo() {
           </Row>
           <Row className="mb-3">
             <Form.Group as={Col} className="mb-1" mb="3" id="codControl">
-                <Form.Label>Código</Form.Label>
-                <Form.Control id="codIdentify" type="text"/>
+              <Form.Label>Código</Form.Label>
+              <Form.Control id="codIdentify" type="text"/>
             </Form.Group>
           </Row>
           <Row>
             <Form.Group className="mb-3">
-                <Form.Label>Motivo</Form.Label>
-                <Form.Control id="motivoValid" as="textarea" minLength={10}
-                    maxLength={255} rows={3} required/>
+              <Form.Label>Motivo</Form.Label>
+              <Form.Control id="motivoIdentify" as="textarea" minLength={10}
+                maxLength={255} rows={3} required/>
             </Form.Group>
           </Row>
           <Row className="ButtonBox">

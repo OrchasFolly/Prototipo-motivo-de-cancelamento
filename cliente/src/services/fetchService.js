@@ -10,7 +10,7 @@ function showMessage(mensagem, tipo="success"){
 
 function pegandoDados(){
     const cod = document.getElementById("codIdentify").value;
-    const motivo = document.getElementById("motivoValid").value;
+    const motivo = document.getElementById("motivoIdentify").value;
 
     return {
         "cod": cod,
@@ -42,7 +42,7 @@ function exibindoTabela(Key = ""){
 
                 for (let i = 0; i < items.length; i++){
                     const row = document.createElement("tr");
-                    row.classList.add("spaceRow")
+                    row.classList.add("spaceRow");
                     row.innerHTML = `
                         <td class="spaceCol">${items[i].cod}</td>
                         <td class="spaceName">${items[i].motivo}</td>
