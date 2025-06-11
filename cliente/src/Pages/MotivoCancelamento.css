@@ -22,10 +22,11 @@
   font-size: 100%;
 }
 
-.alert {
+#alert-message {
   display: flex;
   align-items: center;
   font-size: small;
+  margin: 5px;
   height: 20px;
 }
 

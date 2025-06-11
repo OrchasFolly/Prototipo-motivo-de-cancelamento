@@ -168,7 +168,7 @@ function atualizando(){
 
 function btnPegarDados(cod, motivo, msg = "atualizar"){
     document.getElementById("codIdentify").value = cod;
-    document.getElementById("motivoValid").value = motivo;
+    document.getElementById("motivoIdentify").value = motivo;
 
     if (msg === "atualizar"){
         document.getElementById("atualizar").disabled = false;
@@ -181,7 +181,7 @@ function resetForm(){
     document.getElementById("atualizar").disabled = true;
     document.getElementById("registrar").disabled = false;
     document.getElementById("codIdentify").value = "";
-    document.getElementById("motivoValid").value = "";
+    document.getElementById("motivoIdentify").value = "";
     const control = document.getElementById("codControl");
     const delAlert = document.getElementById("deleteMessage");
     const blockForm = document.getElementById("block");

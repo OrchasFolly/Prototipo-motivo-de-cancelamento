@@ -42,8 +42,8 @@ function Motivo() {
     <>
       <div id="block" className="Main-Style">
         <Form id="formRegister" className="Form-Style" onSubmit={handleValidation} noValidate>
-          <Row className="title">
-            <h1>Motivo de cancelamento</h1>
+          <Row>
+            <h1 className="title">Motivo de cancelamento</h1>
           </Row>
           <Row className="mb-3">
             <Form.Group as={Col} className="mb-1" mb="3" id="codControl">
@@ -60,29 +60,29 @@ function Motivo() {
           </Row>
           <Row className="ButtonBox">
             <Col className="PrimaryGroup">
-                <ButtonPrimary id={"registrar"} type={"submit"} variant={"success"}
-                  title={"Registrar"}
-                />
-                <ButtonPrimary id={"atualizar"} type="submit" variant={"warning"}
-                  title={"Atualizar"} disabled={true}
-                />
-                <ButtonPrimary type={"reset"} variant={"secondary"} title={"Limpar"}
-                  anyEvent={handleReset}
-                />
+              <ButtonPrimary id={"registrar"} type={"submit"} variant={"success"}
+                title={"Registrar"}
+              />
+              <ButtonPrimary id={"atualizar"} type="submit" variant={"warning"}
+                title={"Atualizar"} disabled={true}
+              />
+              <ButtonPrimary type={"reset"} variant={"secondary"} title={"Limpar"}
+                anyEvent={handleReset}
+              />
             </Col>
             <Col className="SecondaryGroup">
-                <ButtonPrimary type={"button"} variant={"secondary"} title={!open ? "Mostrar" : "Esconder"}
-                  anyEvent={hangleDisplay}
-                />
+              <ButtonPrimary type={"button"} variant={"secondary"} title={!open ? "Mostrar" : "Esconder"}
+                anyEvent={hangleDisplay}
+              />
             </Col>
           </Row>
-          <div id="alert-message"></div>
         </Form>
         <div id="exib">
-            <div className="alignSearch">
-                <input id="search" className="searchItem" placeholder="Search" onChange={handleSearch}/>
-            </div>
-            <ListaCancelamento/>
+          <div id="alert-message"></div>
+          <div className="alignSearch">
+            <input id="search" className="searchItem" placeholder="Search" onChange={handleSearch}/>
+          </div>
+          <ListaCancelamento/>
         </div>
       </div>
     </>
