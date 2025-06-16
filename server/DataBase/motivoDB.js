@@ -88,7 +88,7 @@ export default class MotivoDB{
     
     async consultarPelaChave(key){
         const conexao = await conection();
-        const sql = `SELECT * FROM cancelamento WHERE motivo LIKE '%${key}%' OR cod LIKE '%${key}%'`;
+        const sql = `SELECT * FROM cancelamento WHERE cod LIKE '%${key}%'`;
         const [registros, campos] = await conexao.execute(sql, [key]);
         await conexao.release();
         let listaMotivos = [];
