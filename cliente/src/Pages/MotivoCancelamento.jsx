@@ -18,7 +18,7 @@ function Motivo() {
 
   const handleSearch = () => {
     const item = document.getElementById("search").value;
-    fetchService.exibindoTabela(item);
+    fetchService.displayTable(item);
   }
   
   const handleReset = () => {
@@ -34,7 +34,7 @@ function Motivo() {
     }
     else{
       form.classList.add('was-validated');
-      !document.getElementById("registrar").disabled ? fetchService.registrando() : fetchService.atualizando();
+      !document.getElementById("register").disabled ? fetchService.registering() : fetchService.updating();
     }
   }
 
@@ -48,22 +48,22 @@ function Motivo() {
           <Row className="mb-3">
             <Form.Group as={Col} className="mb-1" mb="3" id="codControl">
               <Form.Label>Código</Form.Label>
-              <Form.Control id="codIdentify" type="text"/>
+              <Form.Control id="codId" type="text"/>
             </Form.Group>
           </Row>
           <Row>
             <Form.Group className="mb-3">
               <Form.Label>Motivo</Form.Label>
-              <Form.Control id="motivoIdentify" as="textarea" minLength={10}
+              <Form.Control id="motivoId" as="textarea" minLength={10}
                 maxLength={255} rows={3} required/>
             </Form.Group>
           </Row>
           <Row className="ButtonBox">
             <Col className="PrimaryGroup">
-              <ButtonPrimary id={"registrar"} type={"submit"} variant={"success"}
+              <ButtonPrimary id={"register"} type={"submit"} variant={"success"}
                 title={"Registrar"}
               />
-              <ButtonPrimary id={"atualizar"} type="submit" variant={"warning"}
+              <ButtonPrimary id={"update"} type="submit" variant={"warning"}
                 title={"Atualizar"} disabled={true}
               />
               <ButtonPrimary type={"reset"} variant={"secondary"} title={"Limpar"}

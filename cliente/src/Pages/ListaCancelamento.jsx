@@ -6,7 +6,7 @@ import fetchService from '../services/fetchService';
 function ListaCancelamento() {
   
   const handleLoad = () => {
-    fetchService.exibindoTabela()
+    fetchService.displayTable()
   }
   handleLoad()
 
