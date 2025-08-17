@@ -4,6 +4,7 @@ export default class MotivoControl{
     // Requisição POST
     gravar(req, res){
         res.type('application/json');
+        console.log("req")
 
         if(req.method === "POST" && req.is('application/json')){
             const dados = req.body;
@@ -41,6 +42,7 @@ export default class MotivoControl{
     // Requisição PUT
     alterar(req, res){
         res.type('application/json');
+        console.log("req")
 
         if(req.method === "PUT" && req.is('application/json')){
             const dados = req.body;
@@ -79,6 +81,7 @@ export default class MotivoControl{
     // Excluir dado
     excluir(req, res){
         res.type('application/json');
+        console.log("req")
 
         if(req.method === "DELETE" && req.is('application/json')){
             const dados = req.body;
@@ -116,6 +119,7 @@ export default class MotivoControl{
     // Consultar todos os dados
     consultar(req, res){
         res.type('application/json');
+        console.log("req")
 
         if(req.method === "GET"){
             const cliente = new MotivoCancelamento();

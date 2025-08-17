@@ -8,7 +8,6 @@ function ListaCancelamento() {
   const handleLoad = () => {
     fetchService.displayTable()
   }
-  handleLoad()
 
   return (
     <>

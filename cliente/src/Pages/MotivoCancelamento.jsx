@@ -28,14 +28,15 @@ function Motivo() {
   const handleValidation = (event) => {
     const form = event.currentTarget;
     if (!form.checkValidity()){
-      event.preventDefault();
-      event.stopPropagation();
       form.classList.add('was-validated');
     }
     else{
       form.classList.add('was-validated');
       !document.getElementById("register").disabled ? fetchService.registering() : fetchService.updating();
+      form.reset();
     }
+    event.preventDefault();
+    event.stopPropagation();
   }
 
   return (

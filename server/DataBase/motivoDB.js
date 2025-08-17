@@ -7,8 +7,8 @@ export default class MotivoDB{
     }
 
     async init(){
+        const conexao = await conection();
         try {
-            const conexao = await conection();
             const sql = `CREATE TABLE IF NOT EXISTS cancelamento (
                 cod INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
                 motivo VARCHAR(255) NOT NULL
@@ -21,8 +21,9 @@ export default class MotivoDB{
 
     async gravar(cliente){
         if (cliente instanceof MotivoCancelamento){
+            const conexao = await conection();
             try {
-                const conexao = await conection();
+                await conexao.beginTransaction();
                 const sql = `INSERT INTO cancelamento (motivo)
                             VALUES (?)`;
                 const parametros = [
@@ -30,8 +31,10 @@ export default class MotivoDB{
                 ];
 
                 await conexao.execute(sql, parametros);
+                await conexao.commit();
                 await conexao.release();
             } catch ( erro ) {
+                conexao.rollback();
                 console.log(erro);
             }
         }
@@ -39,8 +42,9 @@ export default class MotivoDB{
 
     async alterar(cliente){
         if (cliente instanceof MotivoCancelamento){
+            const conexao = await conection();
             try {
-                const conexao = await conection();
+                await conexao.beginTransaction();
                 const sql = `UPDATE cancelamento SET 
                             motivo = ?
                             WHERE cod = ?`;            
@@ -49,8 +53,10 @@ export default class MotivoDB{
                     cliente.cod
                 ];
                 await conexao.execute(sql, parametros);
+                await conexao.commit();
                 await conexao.release();
             } catch ( erro ) {
+                conexao.rollback();
                 console.log(erro);
             }
         }
@@ -58,21 +64,24 @@ export default class MotivoDB{
 
     async excluir(cliente){
         if (cliente instanceof MotivoCancelamento){
+            const conexao = await conection();
             try {
-                const conexao = await conection();
+                await conexao.beginTransaction();
                 const sql = `DELETE FROM cancelamento WHERE cod = ?`;
                 const parametros = [cliente.cod];
                 await conexao.execute(sql, parametros);
+                await conexao.commit();
                 await conexao.release();
             } catch ( erro ) {
+                conexao.rollback();
                 console.log(erro);
             }
         }
     }
 
     async consultar(){
+        const conexao = await conection();
         try {
-            const conexao = await conection();
             const sql = `SELECT * FROM cancelamento ORDER BY motivo`;
             const [registros, campos] = await conexao.execute(sql);
             await conexao.release();
@@ -91,9 +100,9 @@ export default class MotivoDB{
     }
     
     async consultarPelaChave(key){
+        const conexao = await conection();
         try {
-            const conexao = await conection();
-            const sql = `SELECT * FROM cancelamento WHERE cod LIKE '%${key}%'`;
+            const sql = `SELECT * FROM cancelamento WHERE cod LIKE '${key}%'`;
             const [registros, campos] = await conexao.execute(sql, [key]);
             await conexao.release();
             let listaMotivos = [];
